@@ -1,0 +1,1803 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>کاتالوگ دیجیتال عطر لیلی | Lily perfume</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+    }
+    body {
+      font-family: 'Vazirmatn', sans-serif;
+      user-select: none;
+      background-color: #060E18;
+      color: #F6F0E6;
+    }
+    .catalog-canvas {
+      width: 1080px;
+      height: 1350px;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+      padding: 90px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(197, 203, 211, 0.15);
+      border-radius: 28px;
+    }
+    .silver-gradient-text {
+      background: linear-gradient(135deg, #FFFFFF 0%, #C5CBD3 50%, #8E98A5 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .luxury-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(197, 203, 211, 0.4), transparent);
+    }
+    .thermo-mini-track {
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: linear-gradient(90deg, #8FB3D9 0%, #C5CBD3 50%, #D9A066 100%);
+      position: relative;
+    }
+    .thermo-mini-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      position: absolute;
+      top: -3px;
+      background: #FFFFFF;
+      box-shadow: 0 0 8px rgba(0,0,0,0.4);
+      transform: translateX(50%);
+    }
+    .editorial-img {
+      object-fit: cover;
+      border-radius: 18px;
+      box-shadow: 0 15px 35px -5px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between overflow-x-hidden">
+
+  <!-- ==================== نوار ابزار کنترل بالا ==================== -->
+  <header class="bg-[#0B1F3A]/95 backdrop-blur-md border-b border-[#C5CBD3]/20 py-3 px-4 sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto flex flex-col items-center gap-2.5">
+      <!-- عنوان برند - مرکز -->
+      <div class="flex flex-col items-center text-center">
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-7 rounded-full border border-[#C5CBD3]/40 flex items-center justify-center bg-white/5">
+            <svg class="w-3.5 h-3.5 stroke-[#C5CBD3]" fill="none" viewBox="0 0 100 100">
+              <path d="M50 15 C45 38 28 46 15 50 C28 54 45 62 50 85 C55 62 72 54 85 50 C72 46 55 38 50 15 Z" stroke-width="2.5"/>
+            </svg>
+          </div>
+          <span class="text-base font-bold tracking-wide text-white">عطر لیلی</span>
+        </div>
+        <span class="text-[11px] text-[#C5CBD3]/80 font-light tracking-wide mt-0.5">کاتالوگ هوشمند ۱۸ صفحه</span>
+      </div>
+
+      <!-- کنترل‌های شیشه‌ای - مرکز -->
+      <div class="flex items-center gap-3 flex-wrap justify-center">
+        <div class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-full border border-[#C5CBD3]/25 text-xs backdrop-blur-sm">
+          <span class="text-[#C5CBD3]">صفحه:</span>
+          <select id="page-select" onchange="goToPage(parseInt(this.value))" class="bg-transparent text-white font-medium outline-none cursor-pointer max-w-[180px]">
+            <!-- داینامیک از جاوااسکریپت پر می‌شود -->
+          </select>
+        </div>
+
+        <div class="flex items-center gap-1.5 bg-white/5 px-2.5 py-1.5 rounded-full border border-[#C5CBD3]/25 backdrop-blur-sm">
+          <button onclick="adjustZoom(-0.05)" class="w-7 h-7 rounded-lg bg-white/5 border border-[#C5CBD3]/20 hover:bg-white/15 text-white flex items-center justify-center text-xs">−</button>
+          <span id="zoom-percent" class="text-xs font-mono w-9 text-center text-[#C5CBD3]">55%</span>
+          <button onclick="adjustZoom(0.05)" class="w-7 h-7 rounded-lg bg-white/5 border border-[#C5CBD3]/20 hover:bg-white/15 text-white flex items-center justify-center text-xs">+</button>
+          <button onclick="resetZoom()" class="text-[11px] px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-[#C5CBD3] mr-1">اندازه خودکار</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== شبیه‌ساز ابعاد اصلی کاتالوگ ==================== -->
+  <main class="flex-1 flex items-center justify-center px-2 py-3 relative overflow-hidden">
+
+    <!-- دکمه صفحه بعد (در RTL سمت راست = جلو) -->
+    <button onclick="nextPage()" class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-40 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#0B1F3A]/90 hover:bg-[#0B1F3A] border border-[#C5CBD3]/40 text-white flex items-center justify-center shadow-2xl backdrop-blur-md transition group">
+      <svg class="w-5 h-5 group-hover:scale-110 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+    </button>
+
+    <!-- دکمه صفحه قبل (در RTL سمت چپ = عقب) -->
+    <button onclick="prevPage()" class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-40 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#0B1F3A]/90 hover:bg-[#0B1F3A] border border-[#C5CBD3]/40 text-white flex items-center justify-center shadow-2xl backdrop-blur-md transition group">
+      <svg class="w-5 h-5 group-hover:scale-110 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+    </button>
+
+    <!-- فضای رندر کاتالوگ -->
+    <div id="catalog-stage" class="transition-transform duration-200 origin-center">
+
+      <!-- ================= صفحه ۱: کاور ================= -->
+      <div id="page-1" class="catalog-canvas bg-[#0B1F3A] text-[#F6F0E6] relative">
+        <!-- تصویر استودیویی پس‌زمینه گل لیلیوم با پوشش گرادیان سرمه‌ای -->
+        <img src="Gemini_Generated_Image_yq3enbyq3enbyq3e.jpg" alt="Lily flower" class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none mix-blend-luminosity">
+        
+        <div class="relative z-10 flex items-center justify-between">
+          <span class="text-[26px] font-light tracking-[6px] text-[#C5CBD3]/80 uppercase">LUXURY PERFUME COLLECTION</span>
+          <div class="w-12 h-12 rounded-full border border-[#C5CBD3]/30 flex items-center justify-center bg-white/5">
+            <svg class="w-6 h-6 stroke-[#C5CBD3]" fill="none" viewBox="0 0 100 100"><path d="M50 15 C45 38 28 46 15 50 C28 54 45 62 50 85 C55 62 72 54 85 50 C72 46 55 38 50 15 Z" stroke-width="2"/></svg>
+          </div>
+        </div>
+
+        <div class="relative z-10 my-auto text-center flex flex-col items-center">
+          <div class="w-20 h-20 rounded-full border border-[#C5CBD3]/30 flex items-center justify-center mb-6 bg-white/[0.04]">
+            <svg class="w-11 h-11 stroke-[#C5CBD3]" fill="none" viewBox="0 0 100 100">
+              <path d="M50 15 C45 38 28 46 15 50 C28 54 45 62 50 85 C55 62 72 54 85 50 C72 46 55 38 50 15 Z" stroke-width="1.8"/>
+              <circle cx="50" cy="50" r="3" fill="#C5CBD3"/>
+            </svg>
+          </div>
+          <h1 class="text-[94px] font-light leading-none mb-3 silver-gradient-text tracking-tight">عطر لیلی</h1>
+          <div class="text-[36px] font-extralight text-[#C5CBD3] tracking-[16px] uppercase mb-8 pl-4">Lily perfume</div>
+          <div class="w-32 luxury-line mb-8"></div>
+          <p class="text-[34px] font-light text-[#F6F0E6] max-w-[760px] leading-relaxed" dir="rtl">
+            «دوستم؛ تنوع لیلی، دست خالی برت نمی‌گردونه (:»
+          </p>
+        </div>
+
+        <div class="relative z-10 flex flex-col gap-6">
+          <div class="grid grid-cols-3 gap-6 text-center">
+            <div class="py-4 border border-[#C5CBD3]/25 rounded-2xl bg-black/25 backdrop-blur-sm">
+              <span class="text-[28px] font-medium text-[#F6F0E6]">۱۰۰٪ اورجینال</span>
+            </div>
+            <div class="py-4 border border-[#C5CBD3]/25 rounded-2xl bg-black/25 backdrop-blur-sm">
+              <span class="text-[28px] font-medium text-[#F6F0E6]">تضمینی</span>
+            </div>
+            <div class="py-4 border border-[#C5CBD3]/25 rounded-2xl bg-black/25 backdrop-blur-sm">
+              <span class="text-[28px] font-medium text-[#F6F0E6]">خوش‌قیمت</span>
+            </div>
+          </div>
+          <div class="flex items-center justify-between pt-4 border-t border-[#C5CBD3]/20 text-[24px] text-[#C5CBD3]/70">
+            <span>صفحه ۰۱</span>
+            <span>ورق بزنید</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= صفحه ۲: درباره لیلی با موکاپ پداستال ۴ بطری ================= -->
+      <div id="page-2" class="catalog-canvas bg-[#F6F0E6] text-[#0B1F3A] hidden">
+        <div class="flex items-center justify-between border-b border-[#0B1F3A]/10 pb-4">
+          <div>
+            <span class="text-[24px] tracking-widest text-[#0B1F3A]/60 font-semibold uppercase block mb-1">اصالت بدون واسطه</span>
+            <h2 class="text-[56px] font-light text-[#0B1F3A]">درباره‌ی عطر لیلی</h2>
+          </div>
+          <span class="text-[24px] text-[#0B1F3A]/50 font-mono">ABOUT LILY</span>
+        </div>
+
+        <div class="my-auto grid grid-cols-12 gap-8 items-center">
+          <!-- تصویر موکاپ پداستال لوکس -->
+          <div class="col-span-5 relative">
+            <div class="p-2 bg-white rounded-2xl border border-[#0B1F3A]/10 shadow-lg">
+              <img src="Gemini_Generated_Image_d5rajod5rajod5ra_pedestal.jpg" alt="Lily Perfume Bottles on Pedestal" class="editorial-img w-full h-[540px] object-cover">
+            </div>
+            <span class="block text-center text-[20px] text-[#0B1F3A]/50 mt-2 font-light">طراحی شیک و شیشه‌های اختصاصی لیلی</span>
+          </div>
+
+          <!-- توضیحات و ستون‌های ارزش -->
+          <div class="col-span-7 flex flex-col gap-5">
+            <p class="text-[30px] font-light text-[#2C3E50] leading-[1.8] text-justify">
+              ما واردکننده‌ی مستقیم کالکشن‌های کامل معتبرترین برندهای جهان هستیم؛ تنوعی گسترده از شاهکارهای محبوب تا عطرهای دست‌ساز نیش. در لیلی، انتخاب عطر تجربه‌ای ساده، مطمئن و دلنشین است.
+            </p>
+            <div class="space-y-4">
+              <div class="p-4 rounded-xl border border-[#0B1F3A]/15 bg-white/80">
+                <span class="text-[30px] font-bold text-[#0B1F3A] block mb-1">۱۰۰٪ اورجینال</span>
+                <span class="text-[26px] font-light text-[#4A5568]">اصالت تک‌تک بطری‌ها مستقیماً تضمین شده است.</span>
+              </div>
+              <div class="p-4 rounded-xl border border-[#0B1F3A]/15 bg-white/80">
+                <span class="text-[30px] font-bold text-[#0B1F3A] block mb-1">تضمینی</span>
+                <span class="text-[26px] font-light text-[#4A5568]">کالکشن کامل زنانه و مردانه با بالاترین کیفیت عرضه.</span>
+              </div>
+              <div class="p-4 rounded-xl border border-[#0B1F3A]/15 bg-white/80">
+                <span class="text-[30px] font-bold text-[#0B1F3A] block mb-1">خوش‌قیمت</span>
+                <span class="text-[26px] font-light text-[#4A5568]">بهترین قیمت ممکن بازار به دلیل واردات مستقیم و بی‌واسطه.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-4 border-t border-[#0B1F3A]/15">
+          <span class="text-[26px] font-medium text-[#0B1F3A]/60">صفحه ۰۲</span>
+          <button onclick="goToPage(4)" class="px-6 py-2.5 rounded-full border border-[#0B1F3A]/30 text-[24px] font-medium hover:bg-[#0B1F3A] hover:text-[#F6F0E6] transition">فهرست بخش‌ها</button>
+        </div>
+      </div>
+
+      <!-- ================= صفحه ۳: راهنمای کاتالوگ با موکاپ مرمر ================= -->
+      <div id="page-3" class="catalog-canvas bg-[#0B1F3A] text-[#F6F0E6] hidden">
+        <div class="flex items-center justify-between border-b border-[#C5CBD3]/15 pb-4">
+          <div>
+            <span class="text-[24px] tracking-widest text-[#C5CBD3]/70 font-semibold uppercase block mb-1">راهنمای هوشمند</span>
+            <h2 class="text-[56px] font-light text-white">زبان بصری رایحه‌ها</h2>
+          </div>
+          <span class="text-[24px] text-[#C5CBD3]/50 font-mono">SCENT GUIDE</span>
+        </div>
+
+        <div class="my-auto grid grid-cols-12 gap-8 items-center">
+          <div class="col-span-8 flex flex-col gap-5">
+            <div class="p-5 rounded-2xl border border-[#C5CBD3]/20 bg-white/[0.03]">
+              <span class="text-[30px] font-medium text-white mb-2 block">۱. ترموستات رایحه (طبع حرارتی)</span>
+              <div class="thermo-mini-track my-3">
+                <div class="thermo-mini-dot" style="left: 30%;"></div>
+              </div>
+              <div class="flex justify-between text-[24px] text-[#C5CBD3]/80">
+                <span class="text-[#8FB3D9]">۱ خیلی خنک</span>
+                <span>۲ خنک</span>
+                <span>۳ متعادل</span>
+                <span class="text-[#D9A066]">۴ گرم</span>
+                <span class="text-[#D9A066]">۵ خیلی گرم</span>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl border border-[#C5CBD3]/20 bg-white/[0.03] flex items-center justify-between">
+              <div>
+                <span class="text-[28px] font-medium text-white block mb-2">۲. سطح کالکشن</span>
+                <div class="flex gap-2 text-[24px] text-[#C5CBD3]">
+                  <span class="px-2.5 py-0.5 rounded border border-[#C5CBD3]/30">کلاسیک</span>
+                  <span class="px-2.5 py-0.5 rounded border border-[#C5CBD3]/30">پرستیژ</span>
+                  <span class="px-2.5 py-0.5 rounded border border-[#C5CBD3]/30">نیش</span>
+                </div>
+              </div>
+              <div class="h-10 w-[1px] bg-[#C5CBD3]/20"></div>
+              <div>
+                <span class="text-[28px] font-medium text-white block mb-2">۳. فصل و جنسیت</span>
+                <div class="flex gap-2 text-[24px] text-[#C5CBD3]">
+                  <span>🍂 پاییز</span>
+                  <span>❄️ زمستان</span>
+                  <span>زنانه / مردانه</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl border border-[#C5CBD3]/30 bg-white/[0.05] flex items-center justify-between">
+              <div>
+                <span class="text-[28px] font-bold text-white block">۴. سفارش با «کد اختصاصی»</span>
+                <p class="text-[24px] text-[#C5CBD3]/80 mt-1">کافیست فقط کد درج‌شده روی کارت را در دایرکت ارسال کنید.</p>
+              </div>
+              <div class="px-5 py-2 rounded-xl border border-[#C5CBD3]/40 bg-[#060E18] text-[26px] font-mono text-[#F6F0E6]">W-DIOR-01</div>
+            </div>
+          </div>
+
+          <!-- تصویر موکاپ مرمر ادیتوریال -->
+          <div class="col-span-4 relative">
+            <div class="p-2 bg-white/10 rounded-2xl border border-[#C5CBD3]/20 backdrop-blur-sm">
+              <img src="Gemini_Generated_Image_d5rajod5rajod5ra.jpg" alt="Lily Perfume on Marble" class="editorial-img w-full h-[520px] object-cover">
+            </div>
+            <span class="block text-center text-[18px] text-[#C5CBD3]/60 mt-2 font-light">طراحی مینیمال شیشه‌ها با گلبرگ لیلیوم</span>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-4 border-t border-[#C5CBD3]/15">
+          <span class="text-[26px] font-medium text-[#C5CBD3]/60">صفحه ۰۳</span>
+          <button onclick="goToPage(4)" class="px-6 py-2.5 rounded-full border border-[#C5CBD3]/30 text-[24px] font-medium hover:bg-white/10 transition">فهرست بخش‌ها</button>
+        </div>
+      </div>
+      <!-- ================= صفحه ۶: نقشه‌ی ترموستات با شات واقعی محصول ================= -->
+      <div id="page-6" class="catalog-canvas bg-[#F6F0E6] text-[#0B1F3A] hidden">
+        <div>
+          <span class="text-[26px] tracking-widest text-[#0B1F3A]/60 font-semibold uppercase block mb-1">پیوستار حرارتی کاتالوگ</span>
+          <h2 class="text-[56px] font-light text-[#0B1F3A]">نقشه‌ی ترموستات رایحه‌ها</h2>
+        </div>
+
+        <div class="my-auto flex flex-col gap-6">
+          <div class="w-full h-7 rounded-full relative" style="background: linear-gradient(90deg, #8FB3D9 0%, #C5CBD3 50%, #D9A066 100%);"></div>
+          
+          <div class="grid grid-cols-5 gap-3 text-center">
+            <div class="flex flex-col gap-1.5 p-3 bg-white/80 border border-[#8FB3D9]/40 rounded-xl">
+              <span class="text-[26px] font-bold text-[#8FB3D9]">۱. خیلی خنک</span>
+              <span class="text-[22px] font-light text-[#4A5568]">لایت بلو DG</span>
+              <span class="text-[22px] font-light text-[#4A5568]">آکوا دی جیو</span>
+              <span class="text-[22px] font-light text-[#4A5568]">نرولی TF</span>
+            </div>
+
+            <div class="flex flex-col gap-1.5 p-3 bg-white/80 border border-[#C5CBD3] rounded-xl">
+              <span class="text-[26px] font-bold text-[#2C3E50]">۲. خنک</span>
+              <span class="text-[22px] font-light text-[#4A5568]">ساواژ Dior</span>
+              <span class="text-[22px] font-light text-[#4A5568]">بلو دو شنل</span>
+              <span class="text-[22px] font-light text-[#4A5568]">ایمجینیشن LV</span>
+            </div>
+
+            <div class="flex flex-col gap-1.5 p-3 bg-white/80 border border-[#C5CBD3] rounded-xl">
+              <span class="text-[26px] font-bold text-[#0B1F3A]">۳. متعادل</span>
+              <span class="text-[22px] font-light text-[#4A5568]">میس دیور</span>
+              <span class="text-[22px] font-light text-[#4A5568]">ژادور Dior</span>
+              <span class="text-[22px] font-light text-[#4A5568]">لیبر YSL</span>
+            </div>
+
+            <div class="flex flex-col gap-1.5 p-3 bg-white/80 border border-[#D9A066]/40 rounded-xl">
+              <span class="text-[26px] font-bold text-[#D9A066]">۴. گرم</span>
+              <span class="text-[22px] font-light text-[#4A5568]">دیور هوم</span>
+              <span class="text-[22px] font-light text-[#4A5568]">کوکو مادمازل</span>
+              <span class="text-[22px] font-light text-[#4A5568]">باکارات ۵۴۰</span>
+            </div>
+
+            <div class="flex flex-col gap-1.5 p-3 bg-white/80 border border-[#D9A066] rounded-xl">
+              <span class="text-[26px] font-bold text-[#D9A066]">۵. خیلی گرم</span>
+              <span class="text-[22px] font-light text-[#4A5568]">وانیلا ۲۸ KYL</span>
+              <span class="text-[22px] font-light text-[#4A5568]">پرایوت بلند TF</span>
+              <span class="text-[22px] font-light text-[#4A5568]">آنجلز شیر</span>
+            </div>
+          </div>
+
+          <!-- بخش شات محصول واقعی برای اعتمادسازی ۱۰۰٪ -->
+          <div class="mt-2 p-5 rounded-2xl bg-white border border-[#0B1F3A]/10 shadow-sm flex items-center gap-6">
+            <img src="Gemini_Generated_Image_8c3j1v8c3j1v8c3j.jpg" alt="Real Lily Perfume Bottle" class="w-36 h-36 object-cover rounded-xl border border-[#0B1F3A]/10">
+            <div>
+              <span class="text-[24px] font-bold text-[#0B1F3A] block">عکاسی از نمونه واقعی ارسالی لیلی</span>
+              <p class="text-[22px] font-light text-[#4A5568] leading-relaxed mt-1">
+                تمام سفارش‌ها در شیشه‌های شفاف باکیفیت بالا، والو اتومایزر طلایی و لیبل اختصاصی عطر لیلی همراه با بارکد و شناسه اصالت تقدیم شما می‌شود.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-4 border-t border-[#0B1F3A]/20">
+          <span class="text-[26px] font-medium text-[#0B1F3A]/60">صفحه ۰۶</span>
+          <button onclick="goToPage(4)" class="px-6 py-2.5 rounded-full border border-[#0B1F3A]/30 text-[26px] font-medium hover:bg-[#0B1F3A] hover:text-[#F6F0E6] transition">فهرست بخش‌ها</button>
+        </div>
+      </div>
+
+      <!-- ================= صفحه ۳: راهنمای کاتالوگ ================= -->
+      <div id="page-3" class="catalog-canvas bg-[#0B1F3A] text-[#F6F0E6] hidden">
+        <div>
+          <span class="text-[24px] tracking-widest text-[#C5CBD3]/70 font-semibold uppercase block mb-1">راهنمای هوشمند</span>
+          <h2 class="text-[60px] font-light text-white">زبان بصری رایحه‌ها</h2>
+        </div>
+
+        <div class="my-auto flex flex-col gap-5">
+          <div class="p-5 rounded-2xl border border-[#C5CBD3]/20 bg-white/[0.02]">
+            <span class="text-[30px] font-medium text-white mb-2 block">۱. ترموستات رایحه (دمای حس عطر)</span>
+            <div class="thermo-mini-track my-3">
+              <div class="thermo-mini-dot" style="left: 30%;"></div>
+            </div>
+            <div class="flex justify-between text-[24px] text-[#C5CBD3]/80">
+              <span class="text-[#8FB3D9]">۱ خیلی خنک</span>
+              <span>۲ خنک</span>
+              <span>۳ متعادل</span>
+              <span class="text-[#D9A066]">۴ گرم</span>
+              <span class="text-[#D9A066]">۵ خیلی گرم</span>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl border border-[#C5CBD3]/20 bg-white/[0.02] flex items-center justify-between">
+            <div>
+              <span class="text-[28px] font-medium text-white block mb-1">۲. برچسب سطح کالکشن</span>
+              <div class="flex gap-2.5 text-[24px] text-[#C5CBD3]">
+                <span class="px-3 py-1 rounded border border-[#C5CBD3]/30">کلاسیک</span>
+                <span class="px-3 py-1 rounded border border-[#C5CBD3]/30">پرستیژ</span>
+                <span class="px-3 py-1 rounded border border-[#C5CBD3]/30">نیش</span>
+              </div>
+            </div>
+            <div class="h-10 w-[1px] bg-[#C5CBD3]/20"></div>
+            <div>
+              <span class="text-[28px] font-medium text-white block mb-1">۳. فصل و جنسیت</span>
+              <div class="flex gap-2 text-[24px] text-[#C5CBD3]">
+                <span>🍂 پاییز</span>
+                <span>❄️ زمستان</span>
+                <span class="mr-2">زنانه / مردانه / یونیسکس</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl border border-[#C5CBD3]/30 bg-white/[0.04] flex items-center justify-between">
+            <div>
+              <span class="text-[30px] font-bold text-white block">۴. سفارش فوق‌العاده سریع با «کد»</span>
+              <p class="text-[26px] text-[#C5CBD3]/80 mt-1">تنها کد اختصاصی کارت را در دایرکت بفرستید، بدون نیاز به تایپ نام طولانی.</p>
+            </div>
+            <div class="px-5 py-2 rounded-xl border border-[#C5CBD3]/40 bg-[#060E18] text-[28px] font-mono text-[#F6F0E6]">W-DIOR-01</div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-3 border-t border-[#C5CBD3]/20">
+          <span class="text-[24px] font-medium text-[#C5CBD3]/60">صفحه ۰۳</span>
+          <button onclick="goToPage(4)" class="px-5 py-2 rounded-full border border-[#C5CBD3]/30 text-[24px] font-medium hover:bg-white/10 transition">فهرست بخش‌ها</button>
+        </div>
+      </div>
+
+      <!-- ================= صفحه ۴: فهرست لینک‌دار ================= -->
+      <div id="page-4" class="catalog-canvas bg-[#F6F0E6] text-[#0B1F3A] hidden">
+        <div>
+          <span class="text-[24px] tracking-widest text-[#0B1F3A]/60 font-semibold uppercase block mb-1">ناوبری هوشمند کاتالوگ</span>
+          <h2 class="text-[60px] font-light text-[#0B1F3A]">فهرست بخش‌ها</h2>
+        </div>
+
+        <div class="my-auto grid grid-cols-2 gap-3.5">
+          <button onclick="goToPage(5)" class="p-4 rounded-xl border border-[#0B1F3A] bg-[#0B1F3A] text-white flex items-center justify-between text-right">
+            <span class="text-[28px] font-medium">انتخاب سریع عطر</span>
+            <span class="text-[22px] text-[#C5CBD3] font-mono">۰۵</span>
+          </button>
+          <button onclick="goToPage(6)" class="p-4 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between text-right hover:border-[#0B1F3A]">
+            <span class="text-[28px] font-light text-[#0B1F3A]">نقشه‌ی ترموستات</span>
+            <span class="text-[22px] text-[#0B1F3A]/40 font-mono">۰۶</span>
+          </button>
+          <button onclick="goToPage(7)" class="p-4 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between text-right hover:border-[#0B1F3A]">
+            <span class="text-[28px] font-light text-[#0B1F3A]">ترند و پرفروش‌ها (۱)</span>
+            <span class="text-[22px] text-[#0B1F3A]/40 font-mono">۰۷</span>
+          </button>
+          <button onclick="goToPage(8)" class="p-4 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between text-right hover:border-[#0B1F3A]">
+            <span class="text-[28px] font-light text-[#0B1F3A]">ترند و پرفروش‌ها (۲)</span>
+            <span class="text-[22px] text-[#0B1F3A]/40 font-mono">۰۸</span>
+          </button>
+          <button onclick="goToPage(9)" class="p-4 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between text-right hover:border-[#0B1F3A]">
+            <span class="text-[28px] font-light text-[#0B1F3A]">خاص و نیش (یونیسکس)</span>
+            <span class="text-[22px] text-[#0B1F3A]/40 font-mono">۰۹</span>
+          </button>
+          <button onclick="goToPage(10)" class="p-4 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between text-right hover:border-[#0B1F3A]">
+            <span class="text-[28px] font-light text-[#0B1F3A]">عطرهای پاییزی 🍂</span>
+            <span class="text-[22px] text-[#0B1F3A]/40 font-mono">۱۰</span>
+          </button>
+          <button onclick="goToPage(11)" class="p-4 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between text-right hover:border-[#0B1F3A]">
+            <span class="text-[28px] font-light text-[#0B1F3A]">عطرهای زمستانی ❄️</span>
+            <span class="text-[22px] text-[#0B1F3A]/40 font-mono">۱۱</span>
+          </button>
+          <button onclick="goToPage(12)" class="p-4 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between text-right hover:border-[#0B1F3A]">
+            <span class="text-[28px] font-light text-[#0B1F3A]">کالکشن زنانه</span>
+            <span class="text-[22px] text-[#0B1F3A]/40 font-mono">۱۲</span>
+          </button>
+          <button onclick="goToPage(13)" class="p-4 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between text-right hover:border-[#0B1F3A]">
+            <span class="text-[28px] font-light text-[#0B1F3A]">کالکشن مردانه</span>
+            <span class="text-[22px] text-[#0B1F3A]/40 font-mono">۱۳</span>
+          </button>
+          <button onclick="goToPage(14)" class="p-4 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between text-right hover:border-[#0B1F3A]">
+            <span class="text-[28px] font-light text-[#0B1F3A]">طبع‌های گرم (۴ و ۵)</span>
+            <span class="text-[22px] text-[#0B1F3A]/40 font-mono">۱۴</span>
+          </button>
+          <button onclick="goToPage(15)" class="p-4 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between text-right hover:border-[#0B1F3A]">
+            <span class="text-[28px] font-light text-[#0B1F3A]">طبع‌های خنک (۱ و ۲)</span>
+            <span class="text-[22px] text-[#0B1F3A]/40 font-mono">۱۵</span>
+          </button>
+          <button onclick="goToPage(16)" class="p-4 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between text-right hover:border-[#0B1F3A]">
+            <span class="text-[28px] font-light text-[#0B1F3A]">فهرست برندها</span>
+            <span class="text-[22px] text-[#0B1F3A]/40 font-mono">۱۶</span>
+          </button>
+        </div>
+
+        <div class="flex items-center justify-between pt-3 border-t border-[#0B1F3A]/20">
+          <span class="text-[24px] font-medium text-[#0B1F3A]/60">صفحه ۰۴</span>
+          <button onclick="goToPage(5)" class="px-5 py-2 rounded-full border border-[#0B1F3A]/30 text-[24px] font-medium hover:bg-[#0B1F3A] hover:text-[#F6F0E6] transition">انتخاب سریع عطر ←</button>
+        </div>
+      </div>
+
+      <!-- ================= صفحه ۵: انتخاب سریع ================= -->
+      <div id="page-5" class="catalog-canvas bg-[#0B1F3A] text-[#F6F0E6] hidden">
+        <div>
+          <span class="text-[24px] tracking-widest text-[#C5CBD3]/70 font-semibold uppercase block mb-1">راهنمای هوشمند در چند ثانیه</span>
+          <h2 class="text-[60px] font-light text-white">کدوم عطر مال توئه؟</h2>
+        </div>
+
+        <div class="my-auto flex flex-col gap-7">
+          <div class="flex flex-col gap-2.5">
+            <span class="text-[28px] font-medium text-[#C5CBD3]">۱. فصل مورد علاقه‌ت چیه؟</span>
+            <div class="grid grid-cols-2 gap-3.5">
+              <button onclick="goToPage(10)" class="p-4 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.03] text-right hover:border-[#C5CBD3]">
+                <span class="text-[30px] font-light text-white block">🍂 پاییز</span>
+                <span class="text-[24px] text-[#C5CBD3]/70 font-light">چوبی، امبری و دلنشین</span>
+              </button>
+              <button onclick="goToPage(11)" class="p-4 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.03] text-right hover:border-[#C5CBD3]">
+                <span class="text-[30px] font-light text-white block">❄️ زمستان</span>
+                <span class="text-[24px] text-[#C5CBD3]/70 font-light">عمیق، وانیلی و ماندگار</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-2.5">
+            <span class="text-[28px] font-medium text-[#C5CBD3]">۲. حس و طبع رایحه؟</span>
+            <div class="grid grid-cols-2 gap-3.5">
+              <button onclick="goToPage(14)" class="p-4 rounded-xl border border-[#D9A066]/40 bg-[#D9A066]/10 text-right hover:border-[#D9A066]">
+                <span class="text-[30px] font-medium text-[#D9A066] block">گرم و شیرین</span>
+                <span class="text-[24px] text-[#F6F0E6]/70 font-light">تنباکو، وانیل و کهربا</span>
+              </button>
+              <button onclick="goToPage(15)" class="p-4 rounded-xl border border-[#8FB3D9]/40 bg-[#8FB3D9]/10 text-right hover:border-[#8FB3D9]">
+                <span class="text-[30px] font-medium text-[#8FB3D9] block">تازه و خنک</span>
+                <span class="text-[24px] text-[#F6F0E6]/70 font-light">مرکباتی، دریایی و تمیز</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-2.5">
+            <span class="text-[28px] font-medium text-[#C5CBD3]">۳. برای کی انتخاب می‌کنی؟</span>
+            <div class="grid grid-cols-3 gap-3.5">
+              <button onclick="goToPage(12)" class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.03] text-center hover:border-white">
+                <span class="text-[28px] font-light text-white">زنانه</span>
+              </button>
+              <button onclick="goToPage(13)" class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.03] text-center hover:border-white">
+                <span class="text-[28px] font-light text-white">مردانه</span>
+              </button>
+              <button onclick="goToPage(9)" class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.03] text-center hover:border-white">
+                <span class="text-[28px] font-light text-white">یونیسکس</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-3 border-t border-[#C5CBD3]/20">
+          <span class="text-[24px] font-medium text-[#C5CBD3]/60">صفحه ۰۵</span>
+          <button onclick="goToPage(4)" class="px-5 py-2 rounded-full border border-[#C5CBD3]/30 text-[24px] font-medium hover:bg-white/10 transition">فهرست بخش‌ها</button>
+        </div>
+      </div>
+
+      <!-- ================= صفحه ۶: نقشه‌ی ترموستات ================= -->
+      <div id="page-6" class="catalog-canvas bg-[#F6F0E6] text-[#0B1F3A] hidden">
+        <div>
+          <span class="text-[24px] tracking-widest text-[#0B1F3A]/60 font-semibold uppercase block mb-1">پیوستار حرارتی کاتالوگ</span>
+          <h2 class="text-[60px] font-light text-[#0B1F3A]">نقشه‌ی ترموستات رایحه‌ها</h2>
+        </div>
+
+        <div class="my-auto flex flex-col gap-5">
+          <div class="w-full h-7 rounded-full my-1 relative" style="background: linear-gradient(90deg, #8FB3D9 0%, #C5CBD3 50%, #D9A066 100%);"></div>
+          
+          <div class="grid grid-cols-5 gap-2.5 text-center">
+            <div class="flex flex-col gap-1.5 p-3 bg-white/70 border border-[#8FB3D9]/40 rounded-xl">
+              <span class="text-[26px] font-bold text-[#8FB3D9]">۱. خیلی خنک</span>
+              <span class="text-[22px] font-light text-[#4A5568]">لایت بلو DG</span>
+              <span class="text-[22px] font-light text-[#4A5568]">آکوا دی جیو</span>
+              <span class="text-[22px] font-light text-[#4A5568]">نرولی TF</span>
+            </div>
+
+            <div class="flex flex-col gap-1.5 p-3 bg-white/70 border border-[#C5CBD3] rounded-xl">
+              <span class="text-[26px] font-bold text-[#2C3E50]">۲. خنک</span>
+              <span class="text-[22px] font-light text-[#4A5568]">ساواژ Dior</span>
+              <span class="text-[22px] font-light text-[#4A5568]">بلو دو شنل</span>
+              <span class="text-[22px] font-light text-[#4A5568]">ایمجینیشن LV</span>
+            </div>
+
+            <div class="flex flex-col gap-1.5 p-3 bg-white/70 border border-[#C5CBD3] rounded-xl">
+              <span class="text-[26px] font-bold text-[#0B1F3A]">۳. متعادل</span>
+              <span class="text-[22px] font-light text-[#4A5568]">میس دیور</span>
+              <span class="text-[22px] font-light text-[#4A5568]">ژادور Dior</span>
+              <span class="text-[22px] font-light text-[#4A5568]">لیبر YSL</span>
+            </div>
+
+            <div class="flex flex-col gap-1.5 p-3 bg-white/70 border border-[#D9A066]/40 rounded-xl">
+              <span class="text-[26px] font-bold text-[#D9A066]">۴. گرم</span>
+              <span class="text-[22px] font-light text-[#4A5568]">دیور هوم</span>
+              <span class="text-[22px] font-light text-[#4A5568]">کوکو مادمازل</span>
+              <span class="text-[22px] font-light text-[#4A5568]">باکارات ۵۴۰</span>
+            </div>
+
+            <div class="flex flex-col gap-1.5 p-3 bg-white/70 border border-[#D9A066] rounded-xl">
+              <span class="text-[26px] font-bold text-[#D9A066]">۵. خیلی گرم</span>
+              <span class="text-[22px] font-light text-[#4A5568]">وانیلا ۲۸ KYL</span>
+              <span class="text-[22px] font-light text-[#4A5568]">پرایوت بلند TF</span>
+              <span class="text-[22px] font-light text-[#4A5568]">آنجلز شیر</span>
+            </div>
+          </div>
+          <p class="text-[26px] font-light text-[#4A5568] text-center mt-2">
+            تمامی کالکشن‌های این کاتالوگ دقیقاً طبق این مقیاس حرارتی استاندارد نشانه‌گذاری شده‌اند.
+          </p>
+        </div>
+
+        <div class="flex items-center justify-between pt-3 border-t border-[#0B1F3A]/20">
+          <span class="text-[24px] font-medium text-[#0B1F3A]/60">صفحه ۰۶</span>
+          <button onclick="goToPage(4)" class="px-5 py-2 rounded-full border border-[#0B1F3A]/30 text-[24px] font-medium hover:bg-[#0B1F3A] hover:text-[#F6F0E6] transition">فهرست بخش‌ها</button>
+        </div>
+      </div>
+
+      <!-- ================= صفحه ۷: ترند و پرفروش‌ها (بخش ۱) ================= -->
+      <div id="page-7" class="catalog-canvas bg-[#0B1F3A] text-[#F6F0E6] hidden">
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-[24px] tracking-widest text-[#C5CBD3]/70 font-semibold uppercase block mb-1">محبوب‌ترین انتخاب‌ها</span>
+            <h2 class="text-[58px] font-light text-white">ترند و پرفروش‌ها <span class="text-[30px] font-extralight text-[#C5CBD3]">(۱)</span></h2>
+          </div>
+          <span class="text-[24px] text-[#C5CBD3]/60 font-mono">۸ محصول اول</span>
+        </div>
+
+        <div class="my-auto grid grid-cols-2 gap-3.5">
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">ساواژ Sauvage</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">دیور · مردانه · کلاسیک</span>
+              <span class="text-[20px] text-[#8FB3D9] mt-0.5">حرارت ۲ (خنک)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">M-DIOR-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">میس دیور Miss Dior</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">دیور · زنانه · کلاسیک</span>
+              <span class="text-[20px] text-white mt-0.5">حرارت ۳ (متعادل)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">W-DIOR-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">ژادور J'adore</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">دیور · زنانه · کلاسیک</span>
+              <span class="text-[20px] text-white mt-0.5">حرارت ۳ (متعادل)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">W-DIOR-02</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">بلو دو شنل Bleu</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">شنل · مردانه · کلاسیک</span>
+              <span class="text-[20px] text-[#8FB3D9] mt-0.5">حرارت ۲ (خنک)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">M-CHNL-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">کوکو مادمازل</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">شنل · زنانه · 🍂</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۴ (گرم)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">W-CHNL-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">وانیلا ۲۸ Vanilla</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">کایالی · زنانه · 🍂 ❄️</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۵ (خیلی گرم)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">W-KYL-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">ادن جویسی اپل ۰۱</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">کایالی · زنانه · کلاسیک</span>
+              <span class="text-[20px] text-[#8FB3D9] mt-0.5">حرارت ۲ (خنک)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">W-KYL-02</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">بامبشل Bombshell</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">ویکتوریا سیکرت · زنانه</span>
+              <span class="text-[20px] text-white mt-0.5">حرارت ۳ (متعادل)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">W-VS-01</span>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-3 border-t border-[#C5CBD3]/20">
+          <span class="text-[24px] font-medium text-[#C5CBD3]/60">صفحه ۰۷</span>
+          <button onclick="goToPage(4)" class="px-5 py-2 rounded-full border border-[#C5CBD3]/30 text-[24px] font-medium hover:bg-white/10 transition">فهرست بخش‌ها</button>
+        </div>
+      </div>
+
+      <!-- ================= صفحه ۸: ترند و پرفروش‌ها (بخش ۲) ================= -->
+      <div id="page-8" class="catalog-canvas bg-[#F6F0E6] text-[#0B1F3A] hidden">
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-[24px] tracking-widest text-[#0B1F3A]/60 font-semibold uppercase block mb-1">محبوب‌ترین انتخاب‌ها</span>
+            <h2 class="text-[58px] font-light text-[#0B1F3A]">ترند و پرفروش‌ها <span class="text-[30px] font-extralight text-[#0B1F3A]/60">(۲)</span></h2>
+          </div>
+          <span class="text-[24px] text-[#0B1F3A]/50 font-mono">۸ محصول دوم</span>
+        </div>
+
+        <div class="my-auto grid grid-cols-2 gap-3.5">
+          <div class="p-3.5 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-[#0B1F3A]">تیز Tease</span>
+              <span class="text-[22px] text-[#4A5568] font-light">ویکتوریا سیکرت · زنانه</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۴ (گرم)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#0B1F3A] px-2.5 py-1 rounded border border-[#0B1F3A]/20 bg-white">W-VS-02</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-[#0B1F3A]">لیبر Libre</span>
+              <span class="text-[22px] text-[#4A5568] font-light">ایو سن لوران YSL · زنانه</span>
+              <span class="text-[20px] text-[#0B1F3A] mt-0.5">حرارت ۳ (متعادل)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#0B1F3A] px-2.5 py-1 rounded border border-[#0B1F3A]/20 bg-white">W-YSL-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-[#0B1F3A]">پارادوکس Paradoxe</span>
+              <span class="text-[22px] text-[#4A5568] font-light">پرادا Prada · زنانه</span>
+              <span class="text-[20px] text-[#0B1F3A] mt-0.5">حرارت ۳ (متعادل)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#0B1F3A] px-2.5 py-1 rounded border border-[#0B1F3A]/20 bg-white">W-PRD-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-[#0B1F3A]">دونا بورن این روما</span>
+              <span class="text-[22px] text-[#4A5568] font-light">ولنتینو Valentino · زنانه</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۴ (گرم)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#0B1F3A] px-2.5 py-1 rounded border border-[#0B1F3A]/20 bg-white">W-VAL-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-[#0B1F3A]">گود گرل Good Girl</span>
+              <span class="text-[22px] text-[#4A5568] font-light">کارولینا هررا · زنانه</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۴ (گرم)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#0B1F3A] px-2.5 py-1 rounded border border-[#0B1F3A]/20 bg-white">W-CH-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-[#0B1F3A]">لایت بلو Light Blue</span>
+              <span class="text-[22px] text-[#4A5568] font-light">دولچه اند گابانا · زنانه</span>
+              <span class="text-[20px] text-[#8FB3D9] mt-0.5">حرارت ۱ (خیلی خنک)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#0B1F3A] px-2.5 py-1 rounded border border-[#0B1F3A]/20 bg-white">W-DG-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-[#0B1F3A]">باکارات رژ ۵۴۰</span>
+              <span class="text-[22px] text-[#4A5568] font-light">کورکجان · یونیسکس · نیش</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۴ (گرم) · ❄️</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#0B1F3A] px-2.5 py-1 rounded border border-[#0B1F3A]/20 bg-white">U-MFK-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-[#0B1F3A]">آنجلز شیر Angels'</span>
+              <span class="text-[22px] text-[#4A5568] font-light">کیلیان · یونیسکس · نیش</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۵ (خیلی گرم) · 🍂 ❄️</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#0B1F3A] px-2.5 py-1 rounded border border-[#0B1F3A]/20 bg-white">U-KIL-01</span>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-3 border-t border-[#0B1F3A]/20">
+          <span class="text-[24px] font-medium text-[#0B1F3A]/60">صفحه ۰۸</span>
+          <button onclick="goToPage(4)" class="px-5 py-2 rounded-full border border-[#0B1F3A]/30 text-[24px] font-medium hover:bg-[#0B1F3A] hover:text-[#F6F0E6] transition">فهرست بخش‌ها</button>
+        </div>
+      </div>
+
+      <!-- ================= صفحه ۹: خاص و نیش (یونیسکس) ================= -->
+      <div id="page-9" class="catalog-canvas bg-[#0B1F3A] text-[#F6F0E6] hidden">
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-[24px] tracking-widest text-[#C5CBD3]/70 font-semibold uppercase block mb-1">مجموعه اختصاصی و دست‌ساز</span>
+            <h2 class="text-[58px] font-light text-white">خاص و نیش <span class="text-[30px] font-extralight text-[#C5CBD3]">(یونیسکس)</span></h2>
+          </div>
+          <span class="text-[24px] text-[#C5CBD3]/60 font-mono">۸ شاهکار نیش</span>
+        </div>
+
+        <div class="my-auto grid grid-cols-2 gap-3.5">
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">باکارات رژ ۵۴۰</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">کورکجان MFK · نیش</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۴ · ❄️ زمستان</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">U-MFK-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">گرند سوآر Grand Soir</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">کورکجان MFK · نیش</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۵ · 🍂 ❄️</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">U-MFK-02</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">آنجلز شیر Angels'</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">کیلیان Kilian · نیش</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۵ · 🍂 ❄️</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">U-KIL-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">ناکسوس Naxos</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">زرجف Xerjoff · نیش</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۴ (عسلی تنباکویی)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">U-XJ-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">پرایوت بلند Private</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">تام فورد TF · پرستیژ</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۵ · 🍂 ❄️</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">U-TF-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">نرولی پورتوفینو</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">تام فورد TF · پرستیژ</span>
+              <span class="text-[20px] text-[#8FB3D9] mt-0.5">حرارت ۱ (مرکباتی و مدیترانه‌ای)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">U-TF-02</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">اومبره نوماد Ombre</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">لویی ویتون LV · پرستیژ</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۵ · ❄️ زمستان</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">U-LV-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">ایمجینیشن Imagination</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">لویی ویتون LV · پرستیژ</span>
+              <span class="text-[20px] text-[#8FB3D9] mt-0.5">حرارت ۲ (چای، مرکبات، تمیز)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">U-LV-02</span>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-3 border-t border-[#C5CBD3]/20">
+          <span class="text-[24px] font-medium text-[#C5CBD3]/60">صفحه ۰۹</span>
+          <button onclick="goToPage(4)" class="px-5 py-2 rounded-full border border-[#C5CBD3]/30 text-[24px] font-medium hover:bg-white/10 transition">فهرست بخش‌ها</button>
+        </div>
+      </div>
+
+      <!-- ================= صفحه ۱۰: عطرهای فصلی: پاییز ================= -->
+      <div id="page-10" class="catalog-canvas bg-[#F6F0E6] text-[#0B1F3A] hidden">
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-[24px] tracking-widest text-[#0B1F3A]/60 font-semibold uppercase block mb-1">روایح گرم، چوبی و دلنشین</span>
+            <h2 class="text-[58px] font-light text-[#0B1F3A]">عطرهای فصلی: پاییز 🍂</h2>
+          </div>
+          <span class="text-[24px] text-[#0B1F3A]/50 font-mono">۸ انتخاب پاییزی</span>
+        </div>
+
+        <div class="my-auto grid grid-cols-2 gap-3.5">
+          <div class="p-3.5 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-[#0B1F3A]">دیور هوم Dior Homme</span>
+              <span class="text-[22px] text-[#4A5568] font-light">دیور · مردانه · کلاسیک</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۴ (پودری و چوبی)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#0B1F3A] px-2.5 py-1 rounded border border-[#0B1F3A]/20 bg-white">M-DIOR-02</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-[#0B1F3A]">کوکو مادمازل</span>
+              <span class="text-[22px] text-[#4A5568] font-light">شنل · زنانه · کلاسیک</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۴ (مرکباتی و پچولی)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#0B1F3A] px-2.5 py-1 rounded border border-[#0B1F3A]/20 bg-white">W-CHNL-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-[#0B1F3A]">بلک ارکید Black Orchid</span>
+              <span class="text-[22px] text-[#4A5568] font-light">تام فورد · زنانه · پرستیژ</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۵ (تیره و شکلاتی)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#0B1F3A] px-2.5 py-1 rounded border border-[#0B1F3A]/20 bg-white">W-TF-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-[#0B1F3A]">وانیلا ۲۸ Vanilla</span>
+              <span class="text-[22px] text-[#4A5568] font-light">کایالی · زنانه · کلاسیک</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۵ (وانیلی و خوراکی)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#0B1F3A] px-2.5 py-1 rounded border border-[#0B1F3A]/20 bg-white">W-KYL-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-[#0B1F3A]">یام پیستاچیو جلاتو ۳۳</span>
+              <span class="text-[22px] text-[#4A5568] font-light">کایالی · زنانه · کلاسیک</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۴ (پسته‌ای و شیرین)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#0B1F3A] px-2.5 py-1 rounded border border-[#0B1F3A]/20 bg-white">W-KYL-03</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-[#0B1F3A]">بر وانیلا Bare Vanilla</span>
+              <span class="text-[22px] text-[#4A5568] font-light">ویکتوریا سیکرت · زنانه</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۵ (وانیلی و نرم)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#0B1F3A] px-2.5 py-1 rounded border border-[#0B1F3A]/20 bg-white">W-VS-03</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-[#0B1F3A]">ولوت پتالز Velvet Petals</span>
+              <span class="text-[22px] text-[#4A5568] font-light">ویکتوریا سیکرت · زنانه</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۴ (گلی و شیرین)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#0B1F3A] px-2.5 py-1 rounded border border-[#0B1F3A]/20 bg-white">W-VS-04</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-[#0B1F3A]">اسپایس‌بمب اکستریم</span>
+              <span class="text-[22px] text-[#4A5568] font-light">ویکتور اند رولف · مردانه</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۵ (ادویه و تنباکو)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#0B1F3A] px-2.5 py-1 rounded border border-[#0B1F3A]/20 bg-white">M-VR-01</span>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-3 border-t border-[#0B1F3A]/20">
+          <span class="text-[24px] font-medium text-[#0B1F3A]/60">صفحه ۱۰</span>
+          <button onclick="goToPage(4)" class="px-5 py-2 rounded-full border border-[#0B1F3A]/30 text-[24px] font-medium hover:bg-[#0B1F3A] hover:text-[#F6F0E6] transition">فهرست بخش‌ها</button>
+        </div>
+      </div>
+
+      <!-- ================= صفحه ۱۱: عطرهای فصلی: زمستان ================= -->
+      <div id="page-11" class="catalog-canvas bg-[#0B1F3A] text-[#F6F0E6] hidden">
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-[24px] tracking-widest text-[#C5CBD3]/70 font-semibold uppercase block mb-1">روایح سنگین، عمیق و پرابهت</span>
+            <h2 class="text-[58px] font-light text-white">عطرهای فصلی: زمستان ❄️</h2>
+          </div>
+          <span class="text-[24px] text-[#C5CBD3]/60 font-mono">۸ انتخاب زمستانی</span>
+        </div>
+
+        <div class="my-auto grid grid-cols-2 gap-3.5">
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">لا کالکشن پریوه</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">دیور · یونیسکس · پرستیژ</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۵ (عودی و امبری)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">U-DIOR-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">پرایوت بلند TF</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">تام فورد · یونیسکس · پرستیژ</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۵ (تنباکو، عود، چرم)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">U-TF-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">اومبره نوماد Ombre</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">لویی ویتون · یونیسکس · پرستیژ</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۵ (عودی و رزینی)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">U-LV-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">له میل Le Male</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">ژان پل گوتیه · مردانه</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۵ (وانیل و تنباکو)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">M-JPG-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">اسپایس‌بمب اکستریم</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">ویکتور اند رولف · مردانه</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۵ (ادویه‌ای و گرم)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">M-VR-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">باکارات رژ ۵۴۰</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">کورکجان MFK · نیش</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۴ (زعفرانی و امبری)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">U-MFK-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">گرند سوآر Grand Soir</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">کورکجان MFK · نیش</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۵ (امبری و رزینی)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">U-MFK-02</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">آنجلز شیر Angels'</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">کیلیان Kilian · نیش</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۵ (کنیاکی و دارچینی)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">U-KIL-01</span>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-3 border-t border-[#C5CBD3]/20">
+          <span class="text-[24px] font-medium text-[#C5CBD3]/60">صفحه ۱۱</span>
+          <button onclick="goToPage(4)" class="px-5 py-2 rounded-full border border-[#C5CBD3]/30 text-[24px] font-medium hover:bg-white/10 transition">فهرست بخش‌ها</button>
+        </div>
+      </div>
+
+      <!-- ================= صفحه ۱۲: کالکشن زنانه ================= -->
+      <div id="page-12" class="catalog-canvas bg-[#F6F0E6] text-[#0B1F3A] hidden">
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-[24px] tracking-widest text-[#0B1F3A]/60 font-semibold uppercase block mb-1">تفکیک اختصاصی بانوان</span>
+            <h2 class="text-[58px] font-light text-[#0B1F3A]">کالکشن زنانه</h2>
+          </div>
+          <span class="text-[24px] text-[#0B1F3A]/50 font-mono">گرم / گلی / خنک</span>
+        </div>
+
+        <div class="my-auto grid grid-cols-2 gap-3.5">
+          <div class="p-3.5 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-[#0B1F3A]">میس دیور Miss Dior</span>
+              <span class="text-[22px] text-[#4A5568] font-light">دیور · گلی و لطیف</span>
+              <span class="text-[20px] text-[#0B1F3A] mt-0.5">حرارت ۳ (متعادل)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#0B1F3A] px-2.5 py-1 rounded border border-[#0B1F3A]/20 bg-white">W-DIOR-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-[#0B1F3A]">ژادور J'adore</span>
+              <span class="text-[22px] text-[#4A5568] font-light">دیور · گلی و درخشان</span>
+              <span class="text-[20px] text-[#0B1F3A] mt-0.5">حرارت ۳ (متعادل)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#0B1F3A] px-2.5 py-1 rounded border border-[#0B1F3A]/20 bg-white">W-DIOR-02</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-[#0B1F3A]">کوکو مادمازل</span>
+              <span class="text-[22px] text-[#4A5568] font-light">شنل · مرکباتی و پچولی</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۴ (گرم) · 🍂</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#0B1F3A] px-2.5 py-1 rounded border border-[#0B1F3A]/20 bg-white">W-CHNL-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-[#0B1F3A]">لیبر Libre</span>
+              <span class="text-[22px] text-[#4A5568] font-light">ایو سن لوران · اسطوخودوسی</span>
+              <span class="text-[20px] text-[#0B1F3A] mt-0.5">حرارت ۳ (شیک)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#0B1F3A] px-2.5 py-1 rounded border border-[#0B1F3A]/20 bg-white">W-YSL-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-[#0B1F3A]">پارادوکس Paradoxe</span>
+              <span class="text-[22px] text-[#4A5568] font-light">پرادا · امبری و گلی</span>
+              <span class="text-[20px] text-[#0B1F3A] mt-0.5">حرارت ۳ (متعادل)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#0B1F3A] px-2.5 py-1 rounded border border-[#0B1F3A]/20 bg-white">W-PRD-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-[#0B1F3A]">گود گرل Good Girl</span>
+              <span class="text-[22px] text-[#4A5568] font-light">کارولینا هررا · شیرین</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۴ (گرم و جذاب)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#0B1F3A] px-2.5 py-1 rounded border border-[#0B1F3A]/20 bg-white">W-CH-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-[#0B1F3A]">برایت کریستال</span>
+              <span class="text-[22px] text-[#4A5568] font-light">ورساچه · گلی و سبک</span>
+              <span class="text-[20px] text-[#8FB3D9] mt-0.5">حرارت ۲ (خنک)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#0B1F3A] px-2.5 py-1 rounded border border-[#0B1F3A]/20 bg-white">W-VRS-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-[#0B1F3A]">لایت بلو Light Blue</span>
+              <span class="text-[22px] text-[#4A5568] font-light">دولچه اند گابانا · مرکباتی</span>
+              <span class="text-[20px] text-[#8FB3D9] mt-0.5">حرارت ۱ (خیلی خنک)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#0B1F3A] px-2.5 py-1 rounded border border-[#0B1F3A]/20 bg-white">W-DG-01</span>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-3 border-t border-[#0B1F3A]/20">
+          <span class="text-[24px] font-medium text-[#0B1F3A]/60">صفحه ۱۲</span>
+          <button onclick="goToPage(4)" class="px-5 py-2 rounded-full border border-[#0B1F3A]/30 text-[24px] font-medium hover:bg-[#0B1F3A] hover:text-[#F6F0E6] transition">فهرست بخش‌ها</button>
+        </div>
+      </div>
+
+      <!-- ================= صفحه ۱۳: کالکشن مردانه ================= -->
+      <div id="page-13" class="catalog-canvas bg-[#0B1F3A] text-[#F6F0E6] hidden">
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-[24px] tracking-widest text-[#C5CBD3]/70 font-semibold uppercase block mb-1">تفکیک اختصاصی آقایان</span>
+            <h2 class="text-[58px] font-light text-white">کالکشن مردانه</h2>
+          </div>
+          <span class="text-[24px] text-[#C5CBD3]/60 font-mono">خنک و تمیز / گرم و ادویه‌ای</span>
+        </div>
+
+        <div class="my-auto grid grid-cols-2 gap-3.5">
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">ساواژ Sauvage</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">دیور · چوبی و تازه</span>
+              <span class="text-[20px] text-[#8FB3D9] mt-0.5">حرارت ۲ (خنک)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">M-DIOR-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">بلو دو شنل Bleu</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">شنل · مرکباتی و چوبی</span>
+              <span class="text-[20px] text-[#8FB3D9] mt-0.5">حرارت ۲ (خنک)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">M-CHNL-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">دیور هوم Dior Homme</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">دیور · پودری و زنبقی</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۴ (گرم) · 🍂</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">M-DIOR-02</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">آکوا دی جیو Acqua</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">جورجیو آرمانی · دریایی و آبی</span>
+              <span class="text-[20px] text-[#8FB3D9] mt-0.5">حرارت ۱ (خیلی خنک)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">M-ARM-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">پور هوم Pour Homme</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">ورساچه · مرکباتی و تمیز</span>
+              <span class="text-[20px] text-[#8FB3D9] mt-0.5">حرارت ۱ (خیلی خنک)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">M-VRS-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">لوم L'Homme</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">پرادا · صابونی و زنبقی</span>
+              <span class="text-[20px] text-[#8FB3D9] mt-0.5">حرارت ۲ (خنک)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">M-PRD-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">له میل Le Male</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">ژان پل گوتیه · وانیلی</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۵ (خیلی گرم) · ❄️</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">M-JPG-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/20 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">اسپایس‌بمب اکستریم</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">ویکتور اند رولف · تنباکویی</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۵ (خیلی گرم) · 🍂</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">M-VR-01</span>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-3 border-t border-[#C5CBD3]/20">
+          <span class="text-[24px] font-medium text-[#C5CBD3]/60">صفحه ۱۳</span>
+          <button onclick="goToPage(4)" class="px-5 py-2 rounded-full border border-[#C5CBD3]/30 text-[24px] font-medium hover:bg-white/10 transition">فهرست بخش‌ها</button>
+        </div>
+      </div>
+
+      <!-- ================= صفحه ۱۴: طبع‌های گرم (۴ و ۵) ================= -->
+      <div id="page-14" class="catalog-canvas bg-[#F6F0E6] text-[#0B1F3A] hidden">
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-[24px] tracking-widest text-[#D9A066] font-semibold uppercase block mb-1">حرارت ۴ و ۵ ترموستات</span>
+            <h2 class="text-[58px] font-light text-[#0B1F3A]">طیف رایحه‌های گرم</h2>
+          </div>
+          <span class="text-[24px] text-[#0B1F3A]/50 font-mono">تفکیک زنانه و مردانه</span>
+        </div>
+
+        <div class="my-auto grid grid-cols-2 gap-3.5">
+          <div class="p-3.5 rounded-xl border border-[#D9A066]/30 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-[#0B1F3A]">وانیلا ۲۸ Vanilla</span>
+              <span class="text-[22px] text-[#4A5568] font-light">کایالی · زنانه · وانیلی</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۵ · 🍂 ❄️</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#0B1F3A] px-2.5 py-1 rounded border border-[#0B1F3A]/20 bg-white">W-KYL-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#D9A066]/30 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-[#0B1F3A]">بلک ارکید Black Orchid</span>
+              <span class="text-[22px] text-[#4A5568] font-light">تام فورد · زنانه · پرستیژ</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۵ · 🍂 پاییز</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#0B1F3A] px-2.5 py-1 rounded border border-[#0B1F3A]/20 bg-white">W-TF-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#D9A066]/30 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-[#0B1F3A]">بر وانیلا Bare Vanilla</span>
+              <span class="text-[22px] text-[#4A5568] font-light">ویکتوریا سیکرت · زنانه</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۵ · 🍂 ❄️</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#0B1F3A] px-2.5 py-1 rounded border border-[#0B1F3A]/20 bg-white">W-VS-03</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#D9A066]/30 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-[#0B1F3A]">کوکو مادمازل</span>
+              <span class="text-[22px] text-[#4A5568] font-light">شنل · زنانه · پچولی</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۴ · 🍂 پاییز</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#0B1F3A] px-2.5 py-1 rounded border border-[#0B1F3A]/20 bg-white">W-CHNL-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#D9A066]/30 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-[#0B1F3A]">دیور هوم Dior Homme</span>
+              <span class="text-[22px] text-[#4A5568] font-light">دیور · مردانه · چوبی</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۴ · 🍂 پاییز</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#0B1F3A] px-2.5 py-1 rounded border border-[#0B1F3A]/20 bg-white">M-DIOR-02</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#D9A066]/30 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-[#0B1F3A]">له میل Le Male</span>
+              <span class="text-[22px] text-[#4A5568] font-light">ژان پل گوتیه · مردانه</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۵ · 🍂 ❄️</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#0B1F3A] px-2.5 py-1 rounded border border-[#0B1F3A]/20 bg-white">M-JPG-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#D9A066]/30 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-[#0B1F3A]">اسپایس‌بمب اکستریم</span>
+              <span class="text-[22px] text-[#4A5568] font-light">ویکتور اند رولف · مردانه</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۵ · 🍂 ❄️</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#0B1F3A] px-2.5 py-1 rounded border border-[#0B1F3A]/20 bg-white">M-VR-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#D9A066]/30 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-[#0B1F3A]">اومبره نوماد Ombre</span>
+              <span class="text-[22px] text-[#4A5568] font-light">لویی ویتون · یونیسکس · پرستیژ</span>
+              <span class="text-[20px] text-[#D9A066] mt-0.5">حرارت ۵ · ❄️ زمستان</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#0B1F3A] px-2.5 py-1 rounded border border-[#0B1F3A]/20 bg-white">U-LV-01</span>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-3 border-t border-[#0B1F3A]/20">
+          <span class="text-[24px] font-medium text-[#0B1F3A]/60">صفحه ۱۴</span>
+          <button onclick="goToPage(4)" class="px-5 py-2 rounded-full border border-[#0B1F3A]/30 text-[24px] font-medium hover:bg-[#0B1F3A] hover:text-[#F6F0E6] transition">فهرست بخش‌ها</button>
+        </div>
+      </div>
+
+      <!-- ================= صفحه ۱۵: طبع‌های خنک (۱ و ۲) ================= -->
+      <div id="page-15" class="catalog-canvas bg-[#0B1F3A] text-[#F6F0E6] hidden">
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-[24px] tracking-widest text-[#8FB3D9] font-semibold uppercase block mb-1">حرارت ۱ و ۲ ترموستات</span>
+            <h2 class="text-[58px] font-light text-white">طیف رایحه‌های خنک</h2>
+          </div>
+          <span class="text-[24px] text-[#C5CBD3]/60 font-mono">تفکیک زنانه و مردانه</span>
+        </div>
+
+        <div class="my-auto grid grid-cols-2 gap-3.5">
+          <div class="p-3.5 rounded-xl border border-[#8FB3D9]/30 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">لایت بلو Light Blue</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">دولچه اند گابانا · زنانه</span>
+              <span class="text-[20px] text-[#8FB3D9] mt-0.5">حرارت ۱ (مرکباتی و تازه)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">W-DG-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#8FB3D9]/30 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">آکوا دی جویا Acqua</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">آرمانی · زنانه · لیمویی نعنایی</span>
+              <span class="text-[20px] text-[#8FB3D9] mt-0.5">حرارت ۱ (خیلی خنک)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">W-ARM-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#8FB3D9]/30 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">برایت کریستال</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">ورساچه · زنانه · گلی سبک</span>
+              <span class="text-[20px] text-[#8FB3D9] mt-0.5">حرارت ۲ (خنک)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">W-VRS-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#8FB3D9]/30 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">ادن جویسی اپل ۰۱</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">کایالی · زنانه · سیب شاداب</span>
+              <span class="text-[20px] text-[#8FB3D9] mt-0.5">حرارت ۲ (خنک)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">W-KYL-02</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#8FB3D9]/30 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">ساواژ Sauvage</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">دیور · مردانه · ادویه‌ای چوبی</span>
+              <span class="text-[20px] text-[#8FB3D9] mt-0.5">حرارت ۲ (خنک)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">M-DIOR-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#8FB3D9]/30 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">بلو دو شنل Bleu</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">شنل · مردانه · مرکباتی چوبی</span>
+              <span class="text-[20px] text-[#8FB3D9] mt-0.5">حرارت ۲ (خنک)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">M-CHNL-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#8FB3D9]/30 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">آکوا دی جیو Acqua</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">آرمانی · مردانه · دریایی</span>
+              <span class="text-[20px] text-[#8FB3D9] mt-0.5">حرارت ۱ (خیلی خنک)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">M-ARM-01</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-[#8FB3D9]/30 bg-white/[0.02] flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[28px] font-medium text-white">پور هوم ورساچه</span>
+              <span class="text-[22px] text-[#C5CBD3]/70 font-light">ورساچه · مردانه · مرکباتی تمیز</span>
+              <span class="text-[20px] text-[#8FB3D9] mt-0.5">حرارت ۱ (خیلی خنک)</span>
+            </div>
+            <span class="text-[24px] font-mono text-[#F6F0E6] px-2.5 py-1 rounded border border-[#C5CBD3]/30 bg-black/30">M-VRS-01</span>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-3 border-t border-[#C5CBD3]/20">
+          <span class="text-[24px] font-medium text-[#C5CBD3]/60">صفحه ۱۵</span>
+          <button onclick="goToPage(4)" class="px-5 py-2 rounded-full border border-[#C5CBD3]/30 text-[24px] font-medium hover:bg-white/10 transition">فهرست بخش‌ها</button>
+        </div>
+      </div>
+
+      <!-- ================= صفحه ۱۶: فهرست برندها ================= -->
+      <div id="page-16" class="catalog-canvas bg-[#F6F0E6] text-[#0B1F3A] hidden">
+        <div>
+          <span class="text-[24px] tracking-widest text-[#0B1F3A]/60 font-semibold uppercase block mb-1">کالکشن کامل خانه‌های عطر</span>
+          <h2 class="text-[60px] font-light text-[#0B1F3A]">فهرست برندها</h2>
+        </div>
+
+        <div class="my-auto grid grid-cols-3 gap-3.5">
+          <button onclick="goToPage(17)" class="p-4 rounded-xl border border-[#0B1F3A]/20 bg-white flex flex-col items-center justify-center hover:border-[#0B1F3A] transition">
+            <span class="text-[28px] font-medium text-[#0B1F3A]">دیور Dior</span>
+            <span class="text-[20px] text-[#4A5568] font-light">۵ کالکشن</span>
+          </button>
+          <button onclick="goToPage(18)" class="p-4 rounded-xl border border-[#0B1F3A]/20 bg-white flex flex-col items-center justify-center hover:border-[#0B1F3A] transition">
+            <span class="text-[28px] font-medium text-[#0B1F3A]">شنل Chanel</span>
+            <span class="text-[20px] text-[#4A5568] font-light">۴ کالکشن</span>
+          </button>
+          <button onclick="goToPage(9)" class="p-4 rounded-xl border border-[#0B1F3A]/20 bg-white flex flex-col items-center justify-center hover:border-[#0B1F3A] transition">
+            <span class="text-[28px] font-medium text-[#0B1F3A]">تام فورد Tom Ford</span>
+            <span class="text-[20px] text-[#4A5568] font-light">۳ کالکشن</span>
+          </button>
+          <button onclick="goToPage(9)" class="p-4 rounded-xl border border-[#0B1F3A]/20 bg-white flex flex-col items-center justify-center hover:border-[#0B1F3A] transition">
+            <span class="text-[28px] font-medium text-[#0B1F3A]">لویی ویتون LV</span>
+            <span class="text-[20px] text-[#4A5568] font-light">۶ کالکشن</span>
+          </button>
+          <button onclick="goToPage(7)" class="p-4 rounded-xl border border-[#0B1F3A]/20 bg-white flex flex-col items-center justify-center hover:border-[#0B1F3A] transition">
+            <span class="text-[28px] font-medium text-[#0B1F3A]">کایالی Kayali</span>
+            <span class="text-[20px] text-[#4A5568] font-light">۳ کالکشن</span>
+          </button>
+          <button onclick="goToPage(8)" class="p-4 rounded-xl border border-[#0B1F3A]/20 bg-white flex flex-col items-center justify-center hover:border-[#0B1F3A] transition">
+            <span class="text-[28px] font-medium text-[#0B1F3A]">ویکتوریا سیکرت</span>
+            <span class="text-[20px] text-[#4A5568] font-light">۴ کالکشن</span>
+          </button>
+          <button onclick="goToPage(8)" class="p-4 rounded-xl border border-[#0B1F3A]/20 bg-white flex flex-col items-center justify-center hover:border-[#0B1F3A] transition">
+            <span class="text-[28px] font-medium text-[#0B1F3A]">ایو سن لوران YSL</span>
+            <span class="text-[20px] text-[#4A5568] font-light">کالکشن لیبر</span>
+          </button>
+          <button onclick="goToPage(8)" class="p-4 rounded-xl border border-[#0B1F3A]/20 bg-white flex flex-col items-center justify-center hover:border-[#0B1F3A] transition">
+            <span class="text-[28px] font-medium text-[#0B1F3A]">پرادا Prada</span>
+            <span class="text-[20px] text-[#4A5568] font-light">پارادوکس و لوم</span>
+          </button>
+          <button onclick="goToPage(8)" class="p-4 rounded-xl border border-[#0B1F3A]/20 bg-white flex flex-col items-center justify-center hover:border-[#0B1F3A] transition">
+            <span class="text-[28px] font-medium text-[#0B1F3A]">ولنتینو Valentino</span>
+            <span class="text-[20px] text-[#4A5568] font-light">دونا بورن این روما</span>
+          </button>
+          <button onclick="goToPage(8)" class="p-4 rounded-xl border border-[#0B1F3A]/20 bg-white flex flex-col items-center justify-center hover:border-[#0B1F3A] transition">
+            <span class="text-[28px] font-medium text-[#0B1F3A]">کارولینا هررا</span>
+            <span class="text-[20px] text-[#4A5568] font-light">گود گرل</span>
+          </button>
+          <button onclick="goToPage(15)" class="p-4 rounded-xl border border-[#0B1F3A]/20 bg-white flex flex-col items-center justify-center hover:border-[#0B1F3A] transition">
+            <span class="text-[28px] font-medium text-[#0B1F3A]">دولچه اند گابانا</span>
+            <span class="text-[20px] text-[#4A5568] font-light">لایت بلو</span>
+          </button>
+          <button onclick="goToPage(15)" class="p-4 rounded-xl border border-[#0B1F3A]/20 bg-white flex flex-col items-center justify-center hover:border-[#0B1F3A] transition">
+            <span class="text-[28px] font-medium text-[#0B1F3A]">ورساچه Versace</span>
+            <span class="text-[20px] text-[#4A5568] font-light">۳ کالکشن</span>
+          </button>
+          <button onclick="goToPage(13)" class="p-4 rounded-xl border border-[#0B1F3A]/20 bg-white flex flex-col items-center justify-center hover:border-[#0B1F3A] transition">
+            <span class="text-[28px] font-medium text-[#0B1F3A]">جورجیو آرمانی</span>
+            <span class="text-[20px] text-[#4A5568] font-light">آکوا دی جیو و جویا</span>
+          </button>
+          <button onclick="goToPage(11)" class="p-4 rounded-xl border border-[#0B1F3A]/20 bg-white flex flex-col items-center justify-center hover:border-[#0B1F3A] transition">
+            <span class="text-[28px] font-medium text-[#0B1F3A]">ژان پل گوتیه</span>
+            <span class="text-[20px] text-[#4A5568] font-light">له میل</span>
+          </button>
+          <button onclick="goToPage(11)" class="p-4 rounded-xl border border-[#0B1F3A]/20 bg-white flex flex-col items-center justify-center hover:border-[#0B1F3A] transition">
+            <span class="text-[28px] font-medium text-[#0B1F3A]">ویکتور اند رولف</span>
+            <span class="text-[20px] text-[#4A5568] font-light">اسپایس‌بمب اکستریم</span>
+          </button>
+          <button onclick="goToPage(9)" class="p-4 rounded-xl border border-[#0B1F3A]/20 bg-white flex flex-col items-center justify-center hover:border-[#0B1F3A] transition">
+            <span class="text-[28px] font-medium text-[#0B1F3A]">کورکجان MFK</span>
+            <span class="text-[20px] text-[#4A5568] font-light">باکارات رژ و گرند سوآر</span>
+          </button>
+          <button onclick="goToPage(9)" class="p-4 rounded-xl border border-[#0B1F3A]/20 bg-white flex flex-col items-center justify-center hover:border-[#0B1F3A] transition">
+            <span class="text-[28px] font-medium text-[#0B1F3A]">کیلیان Kilian</span>
+            <span class="text-[20px] text-[#4A5568] font-light">آنجلز شیر</span>
+          </button>
+          <button onclick="goToPage(9)" class="p-4 rounded-xl border border-[#0B1F3A]/20 bg-white flex flex-col items-center justify-center hover:border-[#0B1F3A] transition">
+            <span class="text-[28px] font-medium text-[#0B1F3A]">زرجف Xerjoff</span>
+            <span class="text-[20px] text-[#4A5568] font-light">ناکسوس</span>
+          </button>
+        </div>
+
+        <div class="flex items-center justify-between pt-3 border-t border-[#0B1F3A]/20">
+          <span class="text-[24px] font-medium text-[#0B1F3A]/60">صفحه ۱۶</span>
+          <button onclick="goToPage(17)" class="px-5 py-2 rounded-full border border-[#0B1F3A]/30 text-[24px] font-medium hover:bg-[#0B1F3A] hover:text-[#F6F0E6] transition">کالکشن دیور Dior ←</button>
+        </div>
+      </div>
+
+      <!-- ================= صفحه ۱۷: اختصاصی برند دیور ================= -->
+      <div id="page-17" class="catalog-canvas bg-[#0B1F3A] text-[#F6F0E6] hidden">
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-[24px] tracking-widest text-[#C5CBD3]/70 font-semibold uppercase block mb-1">صفحه اختصاصی خانه عطر</span>
+            <h2 class="text-[60px] font-light text-white">دیور Dior</h2>
+          </div>
+          <span class="text-[24px] text-[#C5CBD3]/60 font-mono">۵ کالکشن کامل (کارت کامل)</span>
+        </div>
+
+        <div class="my-auto flex flex-col gap-3.5">
+          <!-- ساواژ -->
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/25 bg-white/[0.03] flex items-center justify-between">
+            <div class="flex flex-col gap-0.5">
+              <div class="flex items-center gap-2">
+                <span class="text-[28px] font-medium text-white">ساواژ Sauvage</span>
+                <span class="text-[20px] px-2 py-0.5 rounded border border-[#C5CBD3]/30 text-[#C5CBD3]">مردانه · کلاسیک</span>
+              </div>
+              <span class="text-[22px] text-[#8FB3D9]">حرارت ۲ · تازه، ادویه‌ای و چوبی</span>
+              <p class="text-[22px] font-light text-[#F6F0E6]/80 italic">«نسیم خنک غروب در دل صخره‌های وحشی و آزاد.»</p>
+            </div>
+            <div class="flex flex-col items-end gap-1">
+              <span class="text-[24px] font-mono text-white px-3 py-1 rounded border border-[#C5CBD3]/40 bg-black/40">M-DIOR-01</span>
+              <span class="text-[18px] text-[#C5CBD3]/70">کد رو بفرست، سفارش بده</span>
+            </div>
+          </div>
+
+          <!-- میس دیور -->
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/25 bg-white/[0.03] flex items-center justify-between">
+            <div class="flex flex-col gap-0.5">
+              <div class="flex items-center gap-2">
+                <span class="text-[28px] font-medium text-white">میس دیور Miss Dior</span>
+                <span class="text-[20px] px-2 py-0.5 rounded border border-[#C5CBD3]/30 text-[#C5CBD3]">زنانه · کلاسیک</span>
+              </div>
+              <span class="text-[22px] text-white">حرارت ۳ · گلی و لطیف</span>
+              <p class="text-[22px] font-light text-[#F6F0E6]/80 italic">«قدم زدن میان هزاران گلبرگ رز تازه شکفته.»</p>
+            </div>
+            <div class="flex flex-col items-end gap-1">
+              <span class="text-[24px] font-mono text-white px-3 py-1 rounded border border-[#C5CBD3]/40 bg-black/40">W-DIOR-01</span>
+              <span class="text-[18px] text-[#C5CBD3]/70">کد رو بفرست، سفارش بده</span>
+            </div>
+          </div>
+
+          <!-- ژادور -->
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/25 bg-white/[0.03] flex items-center justify-between">
+            <div class="flex flex-col gap-0.5">
+              <div class="flex items-center gap-2">
+                <span class="text-[28px] font-medium text-white">ژادور J'adore</span>
+                <span class="text-[20px] px-2 py-0.5 rounded border border-[#C5CBD3]/30 text-[#C5CBD3]">زنانه · کلاسیک</span>
+              </div>
+              <span class="text-[22px] text-white">حرارت ۳ · گلی و درخشان</span>
+              <p class="text-[22px] font-light text-[#F6F0E6]/80 italic">«شکوه قطرات طلا روی پوستی آراسته به یاس.»</p>
+            </div>
+            <div class="flex flex-col items-end gap-1">
+              <span class="text-[24px] font-mono text-white px-3 py-1 rounded border border-[#C5CBD3]/40 bg-black/40">W-DIOR-02</span>
+              <span class="text-[18px] text-[#C5CBD3]/70">کد رو بفرست، سفارش بده</span>
+            </div>
+          </div>
+
+          <!-- دیور هوم -->
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/25 bg-white/[0.03] flex items-center justify-between">
+            <div class="flex flex-col gap-0.5">
+              <div class="flex items-center gap-2">
+                <span class="text-[28px] font-medium text-white">دیور هوم Dior Homme</span>
+                <span class="text-[20px] px-2 py-0.5 rounded border border-[#C5CBD3]/30 text-[#C5CBD3]">مردانه · 🍂 پاییز</span>
+              </div>
+              <span class="text-[22px] text-[#D9A066]">حرارت ۴ · پودری، زنبقی و چوبی</span>
+              <p class="text-[22px] font-light text-[#F6F0E6]/80 italic">«کت‌وشلوار پشمی فاخر در یک عصر دل‌چسب پاییزی.»</p>
+            </div>
+            <div class="flex flex-col items-end gap-1">
+              <span class="text-[24px] font-mono text-white px-3 py-1 rounded border border-[#C5CBD3]/40 bg-black/40">M-DIOR-02</span>
+              <span class="text-[18px] text-[#C5CBD3]/70">کد رو بفرست، سفارش بده</span>
+            </div>
+          </div>
+
+          <!-- لا کالکشن پریوه -->
+          <div class="p-3.5 rounded-xl border border-[#C5CBD3]/25 bg-white/[0.03] flex items-center justify-between">
+            <div class="flex flex-col gap-0.5">
+              <div class="flex items-center gap-2">
+                <span class="text-[28px] font-medium text-white">لا کالکشن پریوه Privée</span>
+                <span class="text-[20px] px-2 py-0.5 rounded border border-[#C5CBD3]/30 text-[#C5CBD3]">یونیسکس · پرستیژ · ❄️</span>
+              </div>
+              <span class="text-[22px] text-[#D9A066]">حرارت ۵ · عودی، امبری و لوکس</span>
+              <p class="text-[22px] font-light text-[#F6F0E6]/80 italic">«عطر سلطنتی و جاودان تالارهای مجلل پاریس.»</p>
+            </div>
+            <div class="flex flex-col items-end gap-1">
+              <span class="text-[24px] font-mono text-white px-3 py-1 rounded border border-[#C5CBD3]/40 bg-black/40">U-DIOR-01</span>
+              <span class="text-[18px] text-[#C5CBD3]/70">کد رو بفرست، سفارش بده</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-3 border-t border-[#C5CBD3]/20">
+          <span class="text-[24px] font-medium text-[#C5CBD3]/60">صفحه ۱۷</span>
+          <button onclick="goToPage(18)" class="px-5 py-2 rounded-full border border-[#C5CBD3]/30 text-[24px] font-medium hover:bg-white/10 transition">کالکشن شنل Chanel ←</button>
+        </div>
+      </div>
+
+      <!-- ================= صفحه ۱۸: اختصاصی برند شنل ================= -->
+      <div id="page-18" class="catalog-canvas bg-[#F6F0E6] text-[#0B1F3A] hidden">
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-[24px] tracking-widest text-[#0B1F3A]/60 font-semibold uppercase block mb-1">صفحه اختصاصی خانه عطر</span>
+            <h2 class="text-[60px] font-light text-[#0B1F3A]">شنل Chanel</h2>
+          </div>
+          <span class="text-[24px] text-[#0B1F3A]/50 font-mono">۴ کالکشن کامل (کارت کامل)</span>
+        </div>
+
+        <div class="my-auto flex flex-col gap-4">
+          <!-- بلو دو شنل -->
+          <div class="p-4 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col gap-0.5">
+              <div class="flex items-center gap-2">
+                <span class="text-[30px] font-medium text-[#0B1F3A]">بلو دو شنل Bleu</span>
+                <span class="text-[20px] px-2 py-0.5 rounded border border-[#0B1F3A]/20 text-[#0B1F3A]">مردانه · کلاسیک</span>
+              </div>
+              <span class="text-[22px] text-[#2C3E50]">حرارت ۲ · مرکباتی، چوبی و تمیز</span>
+              <p class="text-[22px] font-light text-[#4A5568] italic">«جلوه یک مرد تسخیرناپذیر در تلاقی آسمان و اقیانوس شبانه.»</p>
+            </div>
+            <div class="flex flex-col items-end gap-1">
+              <span class="text-[24px] font-mono text-[#0B1F3A] px-3 py-1 rounded border border-[#0B1F3A]/20 bg-white">M-CHNL-01</span>
+              <span class="text-[18px] text-[#0B1F3A]/60">کد رو بفرست، سفارش بده</span>
+            </div>
+          </div>
+
+          <!-- کوکو مادمازل -->
+          <div class="p-4 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col gap-0.5">
+              <div class="flex items-center gap-2">
+                <span class="text-[30px] font-medium text-[#0B1F3A]">کوکو مادمازل Mademoiselle</span>
+                <span class="text-[20px] px-2 py-0.5 rounded border border-[#0B1F3A]/20 text-[#0B1F3A]">زنانه · کلاسیک · 🍂</span>
+              </div>
+              <span class="text-[22px] text-[#D9A066]">حرارت ۴ · مرکباتی، گلی و پچولی</span>
+              <p class="text-[22px] font-light text-[#4A5568] italic">«جسارت و طنازی بانویی که سرنوشت را خودش رقم می‌زند.»</p>
+            </div>
+            <div class="flex flex-col items-end gap-1">
+              <span class="text-[24px] font-mono text-[#0B1F3A] px-3 py-1 rounded border border-[#0B1F3A]/20 bg-white">W-CHNL-01</span>
+              <span class="text-[18px] text-[#0B1F3A]/60">کد رو بفرست، سفارش بده</span>
+            </div>
+          </div>
+
+          <!-- گابریل -->
+          <div class="p-4 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col gap-0.5">
+              <div class="flex items-center gap-2">
+                <span class="text-[30px] font-medium text-[#0B1F3A]">گابریل Gabrielle</span>
+                <span class="text-[20px] px-2 py-0.5 rounded border border-[#0B1F3A]/20 text-[#0B1F3A]">زنانه · کلاسیک</span>
+              </div>
+              <span class="text-[22px] text-[#0B1F3A]">حرارت ۳ · گلی و درخشان</span>
+              <p class="text-[22px] font-light text-[#4A5568] italic">«هاله‌ای طلایی از گل‌های سفید که اعتمادبه‌نفس می‌بخشد.»</p>
+            </div>
+            <div class="flex flex-col items-end gap-1">
+              <span class="text-[24px] font-mono text-[#0B1F3A] px-3 py-1 rounded border border-[#0B1F3A]/20 bg-white">W-CHNL-02</span>
+              <span class="text-[18px] text-[#0B1F3A]/60">کد رو بفرست، سفارش بده</span>
+            </div>
+          </div>
+
+          <!-- لس اکسکلوزیف -->
+          <div class="p-4 rounded-xl border border-[#0B1F3A]/15 bg-white/70 flex items-center justify-between">
+            <div class="flex flex-col gap-0.5">
+              <div class="flex items-center gap-2">
+                <span class="text-[30px] font-medium text-[#0B1F3A]">لس اکسکلوزیف Les Exclusifs</span>
+                <span class="text-[20px] px-2 py-0.5 rounded border border-[#0B1F3A]/20 text-[#0B1F3A]">یونیسکس · پرستیژ</span>
+              </div>
+              <span class="text-[22px] text-[#D9A066]">حرارت ۴ · چوبی و عمیق</span>
+              <p class="text-[22px] font-light text-[#4A5568] italic">«مجموعه خصوصی و دست‌چین تاریخچه شنل؛ لوکس و ماندگار.»</p>
+            </div>
+            <div class="flex flex-col items-end gap-1">
+              <span class="text-[24px] font-mono text-[#0B1F3A] px-3 py-1 rounded border border-[#0B1F3A]/20 bg-white">U-CHNL-01</span>
+              <span class="text-[18px] text-[#0B1F3A]/60">کد رو بفرست، سفارش بده</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-3 border-t border-[#0B1F3A]/20">
+          <span class="text-[24px] font-medium text-[#0B1F3A]/60">صفحه ۱۸</span>
+          <button onclick="goToPage(4)" class="px-5 py-2 rounded-full border border-[#0B1F3A]/30 text-[24px] font-medium hover:bg-[#0B1F3A] hover:text-[#F6F0E6] transition">فهرست بخش‌ها</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ==================== نوار پرش سریع پایین ==================== -->
+  <footer class="bg-[#0B1F3A]/95 border-t border-[#C5CBD3]/20 py-2.5 px-3 z-40 flex items-center justify-center gap-1 overflow-x-auto">
+    <div class="flex items-center gap-1" id="dots-container">
+      <!-- دکمه‌های پرش از اسکریپت ساخته می‌شوند -->
+    </div>
+  </footer>
+
+  <script>
+    let currentPage = 1;
+    const totalPages = 18;
+    let currentScale = 0.55;
+
+    const pageTitles = {
+      1: "کاور اصلی برند",
+      2: "درباره‌ی عطر لیلی",
+      3: "راهنمای کاتالوگ و ترموستات",
+      4: "فهرست بخش‌های کاتالوگ",
+      5: "انتخاب سریع (کدوم عطر مال توئه؟)",
+      6: "نقشه‌ی ترموستات رایحه‌ها",
+      7: "ترند و پرفروش‌ها - بخش اول",
+      8: "ترند و پرفروش‌ها - بخش دوم",
+      9: "خاص و نیش (یونیسکس)",
+      10: "عطرهای فصلی: پاییز 🍂",
+      11: "عطرهای فصلی: زمستان ❄️",
+      12: "کالکشن اختصاصی زنانه",
+      13: "کالکشن اختصاصی مردانه",
+      14: "طیف طبع‌های گرم (۴ و ۵)",
+      15: "طیف طبع‌های خنک (۱ و ۲)",
+      16: "فهرست برندها",
+      17: "کارت کامل برند دیور Dior",
+      18: "کارت کامل برند شنل Chanel"
+    };
+
+    const stage = document.getElementById('catalog-stage');
+    const zoomText = document.getElementById('zoom-percent');
+    const pageSelect = document.getElementById('page-select');
+    const dotsContainer = document.getElementById('dots-container');
+
+    // پر کردن سلکتور و دکمه‌های ناوبری
+    function setupNavigation() {
+      pageSelect.innerHTML = '';
+      dotsContainer.innerHTML = '';
+
+      for (let i = 1; i <= totalPages; i++) {
+        // سلکتور
+        const opt = document.createElement('option');
+        opt.value = i;
+        opt.textContent = `${i}. ${pageTitles[i]}`;
+        pageSelect.appendChild(opt);
+
+        // دکمه‌های پایین
+        const btn = document.createElement('button');
+        btn.id = `dot-${i}`;
+        btn.className = "px-2.5 py-1 rounded-md text-[11px] whitespace-nowrap transition text-[#C5CBD3] hover:text-white";
+        btn.textContent = `${i}`;
+        btn.onclick = () => goToPage(i);
+        dotsContainer.appendChild(btn);
+      }
+    }
+
+    function autoFitScale() {
+      // فضای بیشتر برای کاتالوگ بزرگ‌تر و مرکزی (کمتر از هدر و فوتر کم می‌کنیم)
+      const availableHeight = window.innerHeight - 130;
+      const availableWidth = window.innerWidth - 40;
+      const scaleY = availableHeight / 1350;
+      const scaleX = availableWidth / 1080;
+      let optimalScale = Math.min(scaleX, scaleY);
+      // اجازه می‌دهیم کمی بزرگ‌تر شود روی موبایل
+      optimalScale = Math.min(Math.max(optimalScale, 0.28), 0.98);
+      currentScale = optimalScale;
+      applyScale();
+    }
+
+    function applyScale() {
+      stage.style.transform = `scale(${currentScale})`;
+      zoomText.textContent = `${Math.round(currentScale * 100)}%`;
+      // مرکز کردن بهتر
+      stage.parentElement.style.height = `${1350 * currentScale + 16}px`;
+      stage.parentElement.style.width = `${1080 * currentScale + 16}px`;
+    }
+
+    function adjustZoom(delta) {
+      currentScale = Math.min(Math.max(currentScale + delta, 0.25), 1.2);
+      applyScale();
+    }
+
+    function resetZoom() {
+      autoFitScale();
+    }
+
+    function goToPage(page) {
+      if (page < 1 || page > totalPages) return;
+      currentPage = page;
+
+      for (let i = 1; i <= totalPages; i++) {
+        const p = document.getElementById(`page-${i}`);
+        const dot = document.getElementById(`dot-${i}`);
+        if (p) p.classList.add('hidden');
+        if (dot) {
+          dot.className = "px-2.5 py-1 rounded-md text-[11px] whitespace-nowrap transition text-[#C5CBD3] hover:text-white";
+        }
+      }
+
+      const activePage = document.getElementById(`page-${page}`);
+      if (activePage) activePage.classList.remove('hidden');
+
+      const activeDot = document.getElementById(`dot-${page}`);
+      if (activeDot) {
+        activeDot.className = "px-2.5 py-1 rounded-md text-[11px] whitespace-nowrap transition bg-[#F6F0E6] text-[#0B1F3A] font-bold";
+      }
+
+      pageSelect.value = page;
+    }
+
+    function nextPage() {
+      if (currentPage < totalPages) goToPage(currentPage + 1);
+      else goToPage(1);
+    }
+
+    function prevPage() {
+      if (currentPage > 1) goToPage(currentPage - 1);
+      else goToPage(totalPages);
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') nextPage();
+      if (e.key === 'ArrowRight') prevPage();
+    });
+
+    window.addEventListener('resize', autoFitScale);
+    window.addEventListener('load', () => {
+      setupNavigation();
+      autoFitScale();
+      goToPage(1);
+    });
+  </script>
+</body>
+</html>
